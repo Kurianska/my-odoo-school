@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo noupdate="1">
+
+    <record id="doctor_therapist" model="hr.hospital.doctor">
+            <field name="name">Vitkovska</field>
+        </record>
+        <record id="doctor_surgeon" model="hr.hospital.doctor">
+            <field name="name">Bogdan</field>
+        </record>
+        <record id="doctor_allergist" model="hr.hospital.doctor">
+            <field name="name">Chugai</field>
+        </record>
+
+</odoo>
