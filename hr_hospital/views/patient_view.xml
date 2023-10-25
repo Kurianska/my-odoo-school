@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="hr_hospital_patient_tree" model="ir.ui.view">
         <field name="name">hr.hospital.patient.tree</field>
         <field name="model">hr.hospital.patient</field>
@@ -19,8 +20,24 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="doctor_id" widget="many2one_tags"/>
-                        <field name="disease_id" widget="many2one_tags"/>
+                        <field name="image"/>
+                        <field name="gender"/>
+                        <field name="phone"/>
+                        <field name="email"/>
+                        <field name="address"/>
+                        <field name="birthday_date"/>
+                        <field name="passport_data"/>
+                        <field name="age"/>
+                        <field name="contact_person"/>
+                        <field name="doctor_id" widget="many2one_tags"  forcecreate="False"/>
+                    </group>
+                    <group string="Doctor Change History">
+                        <field name="doctor_change_ids" widget="one2many_list" options="{'reload_on_button': true}">
+                            <tree editable="bottom">
+                                <field name="change_doctor_date"/>
+                                <field name="doctor_id"/>
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
             </form>

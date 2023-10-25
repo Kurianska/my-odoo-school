@@ -3,12 +3,51 @@
 
         <record id="patient_anna" model="hr.hospital.patient">
             <field name="name">Anna</field>
+            <field name="gender">female</field>
+            <field name="phone">+1122334455</field>
+            <field name="email">anna@example.com</field>
+            <field name="address">Lviv</field>
+            <field name="birthday_date">1990/01/01</field>
+            <field name="passport_data">AB123456</field>
+            <field name="age">33</field>
+            <field name="contact_person">Olga</field>
+            <field name="doctor_id" ref="hr_hospital.doctor_therapist"/>
+        </record>
+        <record id="patient_change_anna" model="hr.hospital.doctor.change.history">
+            <field name="patient_id" ref="patient_anna"/>
+            <field name="doctor_id" ref="hr_hospital.doctor_surgeon"/>
         </record>
         <record id="patient_pavlo" model="hr.hospital.patient">
             <field name="name">Pavlo</field>
+            <field name="gender">male</field>
+            <field name="phone">+2233445566</field>
+            <field name="email">pavlo@example.com</field>
+            <field name="address">Poltava</field>
+            <field name="birthday_date">1995/05/05</field>
+            <field name="passport_data">CD789012</field>
+            <field name="age">28</field>
+            <field name="contact_person">Petro</field>
+            <field name="doctor_id" ref="hr_hospital.doctor_surgeon"/>
+        </record>
+        <record id="patient_change_pavlo" model="hr.hospital.doctor.change.history">
+            <field name="patient_id" ref="patient_pavlo"/>
+            <field name="doctor_id" ref="hr_hospital.doctor_therapist"/>
         </record>
         <record id="patient_ivan" model="hr.hospital.patient">
             <field name="name">Ivan</field>
+            <field name="gender">male</field>
+            <field name="phone">+2233445566</field>
+            <field name="email">pavlo@example.com</field>
+            <field name="address">Poltava</field>
+            <field name="birthday_date">1995/05/05</field>
+            <field name="passport_data">CD789012</field>
+            <field name="age">28</field>
+            <field name="contact_person">Petro</field>
+            <field name="doctor_id" ref="hr_hospital.doctor_therapist"/>
+        </record>
+        <record id="patient_change_ivan" model="hr.hospital.doctor.change.history">
+            <field name="patient_id" ref="patient_ivan"/>
+            <field name="doctor_id" ref="hr_hospital.doctor_allergist"/>
         </record>
 
     </odoo>

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="hr_hospital_visit_tree" model="ir.ui.view">
         <field name="name">hr.hospital.visit.tree</field>
         <field name="model">hr.hospital.visit</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
+                <field name="visit_date" widget="datetime"/>
             </tree>
         </field>
     </record>
@@ -18,12 +19,26 @@
                 <header></header>
                 <sheet>
                     <group>
-                        <field name="name"/>
                         <field name="visit_date" widget="datetime"/>
+                        <field name="doctor_id" widget="many2one_tags"/>
+                        <field name="patient_id" widget="many2one_tags"/>
+                        <field name="diagnosis_id" widget="many2one_tags"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
+
+    <record id="hr_hospital_visit_act_window" model="ir.actions.act_window">
+        <field name="name">Visits</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.hospital.visit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="hr_hospital_visit_menu"
+              action="hr_hospital_visit_act_window"
+              parent="hr_hospital_main_menu"
+              sequence="5"/>
 
 </odoo>

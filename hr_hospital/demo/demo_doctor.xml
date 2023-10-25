@@ -3,13 +3,28 @@
 <odoo noupdate="1">
 
     <record id="doctor_therapist" model="hr.hospital.doctor">
-            <field name="name">Vitkovska</field>
-        </record>
-        <record id="doctor_surgeon" model="hr.hospital.doctor">
-            <field name="name">Bogdan</field>
-        </record>
-        <record id="doctor_allergist" model="hr.hospital.doctor">
-            <field name="name">Chugai</field>
-        </record>
+        <field name="name">Vitkovska</field>
+        <field name="gender">female</field>
+        <field name="phone">+123456789</field>
+        <field name="email">vitkovska@example.com</field>
+        <field name="address">123 Med Street</field>
+        <field name="specialty">Cardiology</field>
+    </record>
+    <record id="doctor_surgeon" model="hr.hospital.doctor">
+        <field name="name">Bogdan</field>
+        <field name="gender">male</field>
+        <field name="phone">+987654321</field>
+        <field name="email">bogdan@example.com</field>
+        <field name="address">456 Med Avenue</field>
+        <field name="specialty">Neurology</field>
+    </record>
+    <record id="doctor_allergist" model="hr.hospital.doctor">
+        <field name="name">Chugai</field>
+        <field name="gender">female</field>
+        <field name="phone">+987654321</field>
+        <field name="email">bogdan@example.com</field>
+        <field name="address">456 Med Avenue</field>
+        <field name="specialty">Dermatology</field>
+    </record>
 
 </odoo>

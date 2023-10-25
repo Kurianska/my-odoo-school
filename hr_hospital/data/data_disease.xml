@@ -4,8 +4,24 @@
     <record id="disease_cold" model="hr.hospital.disease">
         <field name="name">Cold</field>
     </record>
+    <record id="disease_severe_cold" model="hr.hospital.disease">
+        <field name="name">Severe Cold</field>
+        <field name="parent_id" ref="disease_cold"/>
+    </record>
     <record id="disease_allergy" model="hr.hospital.disease">
         <field name="name">Allergy</field>
+    </record>
+    <record id="disease_dust_allergy" model="hr.hospital.disease">
+        <field name="name">Dust Allergy</field>
+        <field name="parent_id" ref="disease_allergy"/>
+    </record>
+    <record id="disease_fur_allergy" model="hr.hospital.disease">
+        <field name="name">Fur Allergy</field>
+        <field name="parent_id" ref="disease_allergy"/>
+    </record>
+    <record id="disease_meal_allergy" model="hr.hospital.disease">
+        <field name="name">Meal Allergy</field>
+        <field name="parent_id" ref="disease_allergy"/>
     </record>
     <record id="disease_angina" model="hr.hospital.disease">
         <field name="name">Angina</field>
