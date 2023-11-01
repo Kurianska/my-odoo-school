@@ -22,6 +22,8 @@
         "views/diagnosis_view.xml",
         "wizard/reassign_doctor_wizard.xml",
         "wizard/disease_report_wizard.xml",
+        "wizard/reschedule_visit_wizard.xml",
+        "wizard/doctor_schedule_wizard_week.xml",
     ],
 
     'demo': [

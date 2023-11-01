@@ -1,4 +1,4 @@
-from odoo import models, fields, exceptions, _
+from odoo import models, fields, exceptions, api, _
 
 
 class HospitalVisit(models.Model):
@@ -36,9 +36,9 @@ class HospitalVisit(models.Model):
                     _('You cannot delete visits with diagnoses'))
         return super().unlink()
 
-    def toggle_active(self):
+    @api.constrains('active')
+    def _check_archive(self):
         for record in self:
-            if record.diagnosis_id:
-                raise exceptions.UserError(
+            if not record.active and record.diagnosis_id:
+                raise exceptions.ValidationError(
                     _('You cannot archive visits with diagnoses'))
-        return super().toggle_active()

@@ -24,6 +24,10 @@ class Disease(models.Model):
         inverse_name='parent_id', string='Child Diseases')
     disease_count = fields.Integer(compute='_compute_disease_count')
 
+    diagnosis_ids = fields.One2many(
+        comodel_name='hr.hospital.diagnosis',
+        inverse_name='disease_id', string='Diagnoses')
+
     @api.depends('name', 'parent_id.complete_name')
     def _compute_complete_name(self):
         for category in self:
@@ -40,3 +44,32 @@ class Disease(models.Model):
                 ('disease_id', 'child', obj.id)
 
             ])
+
+
+class ReportDisease(models.TransientModel):
+    _name = 'hr.hospital.report.disease'
+    _description = 'Disease Report for a Month'
+
+    disease_id = fields.Many2one(
+        comodel_name='hr.hospital.disease',
+        string='Disease',
+        required=True)
+    month = fields.Selection(
+        selection=[
+            ('1', 'January'),
+            ('2', 'February'),
+            ('3', 'March'),
+            ('4', 'April'),
+            ('5', 'May'),
+            ('6', 'June'),
+            ('7', 'July'),
+            ('8', 'August'),
+            ('9', 'September'),
+            ('10', 'October'),
+            ('11', 'November'),
+            ('12', 'December')
+        ], required=True)
+    year = fields.Char()
+    diagnosis_count = fields.Integer(
+        comodel_name='hr.hospital.diagnosis',
+        string="Number of Diagnoses")

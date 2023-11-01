@@ -16,7 +16,16 @@
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <form>
-                <header></header>
+                <header>
+                     <button string="Reschedule"
+                             type="object"
+                             name="action_show_reschedule_wizard"
+                             class="oe_highlight"/>
+                    <button string="Set Weekly Schedule"
+                            type="object"
+                            name="action_show_schedule_week_wizard"
+                            class="oe_highlight"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -29,25 +38,29 @@
                     </group>
 
                     <notebook>
-                            <page string="Diagnoses">
-                                <field name="diagnoses_ids">
-                                    <tree editable="bottom">
-                                        <field name="name"/>
-                                        <field name="patient_id"/>
-                                        <field name="mentor_comment"/>
-                                    </tree>
-                                </field>
-                            </page>
+
+                        <page string="Diagnoses">
+                            <field name="diagnoses_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="patient_id"/>
+                                    <field name="mentor_comment"/>
+                                </tree>
+                            </field>
+                        </page>
+
                         <page string="Doctor Schedule">
                             <field name="schedules_ids" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="appointment_date"/>
                                     <field name="appointment_time"/>
+                                    <field name="week_type"/>
                                 </tree>
                                 <form>
                                     <group>
                                         <field name="appointment_date"/>
                                         <field name="appointment_time"/>
+                                        <field name="week_type"/>
                                     </group>
                                 </form>
                             </field>

@@ -1,35 +1,13 @@
 from odoo import models, fields
 
 
-class ReportDisease(models.TransientModel):
-    _name = 'hr.hospital.report.disease'
-    _description = 'Disease Report for a Month'
-
-    disease_id = fields.Many2one(comodel_name='hr.hospital.disease', string='Disease')
-    month = fields.Selection(
-        selection=[
-            ('1', 'January'),
-            ('2', 'February'),
-            ('3', 'March'),
-            ('4', 'April'),
-            ('5', 'May'),
-            ('6', 'June'),
-            ('7', 'July'),
-            ('8', 'August'),
-            ('9', 'September'),
-            ('10', 'October'),
-            ('11', 'November'),
-            ('12', 'December')
-        ], required=True)
-    year = fields.Char()
-    diagnosis_count = fields.Integer()
-
-
 class DiseaseReportWizard(models.TransientModel):
     _name = 'hr.hospital.disease.report.wizard'
     _description = 'Wizard for Monthly Disease Report'
 
-    doctor_id = fields.Many2one(comodel_name='hr.hospital.doctor', string='Doctor')
+    doctor_id = fields.Many2one(
+        comodel_name='hr.hospital.doctor',
+        string='Doctor')
     _rec_name = 'doctor_id'
     year = fields.Char(required=True)
     month = fields.Selection(
@@ -49,7 +27,11 @@ class DiseaseReportWizard(models.TransientModel):
         ], required=True)
     disease_id = fields.Many2one(
         comodel_name='hr.hospital.disease',
-        string='Disease')
+        string='Disease',
+        required=True)
+    diagnosis_count = fields.Integer(
+        comodel_name='hr.hospital.diagnosis',
+        string="Number of Diagnoses")
 
     def action_generate_report(self):
         for wizard in self:
@@ -72,12 +54,12 @@ class DiseaseReportWizard(models.TransientModel):
                     disease_counts[disease_id] = 0
                 disease_counts[disease_id] += 1
 
-            for disease_id, count in disease_counts.items():
+            for disease_id, diagnosis_count in disease_counts.items():
                 wizard.env['hr.hospital.report.disease'].create({
                     'disease_id': disease_id,
                     'month': wizard.month,
                     'year': wizard.year,
-                    'diagnosis_count': count
+                    'diagnosis_count': diagnosis_count
                 })
 
             return {

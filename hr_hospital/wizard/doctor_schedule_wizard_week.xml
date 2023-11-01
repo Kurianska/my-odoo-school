@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="doctor_schedule_week_wizard_form" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.schedule.week.wizard.form</field>
+        <field name="model">hr.hospital.doctor.schedule.week.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="doctor_id"/>
+                    <field name="week_type"/>
+                </group>
+                <group>
+                    <field name="monday_time"/>
+                    <field name="tuesday_time"/>
+                    <field name="wednesday_time"/>
+                    <field name="thursday_time"/>
+                    <field name="friday_time"/>
+                    <field name="saturday_time"/>
+                    <field name="sunday_time"/>
+                </group>
+                <footer>
+                    <button string="Create"
+                            type="object"
+                            class="btn-primary"
+                            name="action_set_schedule_week"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+        <record id="action_set_schedule_week" model="ir.actions.act_window">
+        <field name="name">Set Schedule for Week</field>
+        <field name="res_model">hr.hospital.doctor.schedule.week.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="hr_hospital.model_hr_hospital_doctor"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="binding_type">action</field>
+    </record>
+
+</odoo>
