@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, _
 
 
 class Patient(models.Model):
@@ -16,7 +16,6 @@ class Patient(models.Model):
         string='Patient Passport Data', required=True)
     age = fields.Integer(required=True)
     contact_person = fields.Char()
-    address = fields.Char()
     doctor_id = fields.Many2one(
         comodel_name='hr.hospital.doctor', )
     change_doctor_date = fields.Datetime(
@@ -25,6 +24,16 @@ class Patient(models.Model):
         comodel_name='hr.hospital.doctor.change.history',
         inverse_name='patient_id',
         string='Doctor Change History'
+    )
+    diagnosis_ids = fields.One2many(
+        comodel_name='hr.hospital.diagnosis',
+        inverse_name='patient_id',
+        string='Patient Diagnosis'
+    )
+    disease_ids = fields.One2many(
+        comodel_name='hr.hospital.disease',
+        inverse_name='patient_id',
+        string='Patient Disease'
     )
 
     def write(self, vals):
@@ -36,3 +45,38 @@ class Patient(models.Model):
                     'doctor_id': vals['doctor_id']
                 })
         return res
+
+    def action_view_visits(self):
+        action = self.env.ref(
+            'hr_hospital.hr_hospital_visit_act_window').read()[0]
+        action['domain'] = [('patient_id', '=', self.id)]
+        action['context'] = {'default_patient_id': self.id}
+        return action
+
+    def action_view_diagnosis(self):
+        action = self.env.ref(
+            'hr_hospital.hr_hospital_diagnosis_act_window').read()[0]
+        action['domain'] = [('patient_id', '=', self.id)]
+        action['context'] = {'default_patient_id': self.id}
+        return action
+
+    def action_view_tests(self):
+        action = self.env.ref(
+            'hr_hospital.hr_hospital_patient_test_act_window').read()[0]
+        action['domain'] = [('patient_id', '=', self.id)]
+        action['context'] = {'default_patient_id': self.id}
+        return action
+
+    def action_schedule_appointment(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Schedule Appointment'),
+            'res_model': 'hr.hospital.doctor.schedule',
+            'view_mode': 'form',
+            'context': {
+                'default_patient_id': self.id,
+                'default_doctor_id': self.doctor_id.id,
+                'form_view_initial_mode': 'edit',
+            },
+            'target': 'new',
+        }

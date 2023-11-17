@@ -30,7 +30,7 @@
         </field>
     </record>
 
-        <record id="action_set_schedule_week" model="ir.actions.act_window">
+    <record id="action_set_schedule_week" model="ir.actions.act_window">
         <field name="name">Set Schedule for Week</field>
         <field name="res_model">hr.hospital.doctor.schedule.week.wizard</field>
         <field name="view_mode">form</field>

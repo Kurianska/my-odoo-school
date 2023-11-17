@@ -16,7 +16,12 @@
         <field name="model">hr.hospital.patient</field>
         <field name="arch" type="xml">
             <form>
-                <header></header>
+                <header>
+                    <button string="Visit History" type="object" name="action_view_visits"/>
+                    <button string="Diagnosis History" type="object" name="action_view_diagnosis"/>
+                    <button string="Test History" type="object" name="action_view_tests"/>
+                    <button string="Schedule Appointment" type="object" name="action_schedule_appointment" class="oe_highlight"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -39,6 +44,14 @@
                             </tree>
                         </field>
                     </group>
+                    <notebook>
+                        <page string="Diagnosis History">
+                            <field name="diagnosis_ids"/>
+                        </page>
+                        <page string="Disease History">
+                            <field name="disease_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

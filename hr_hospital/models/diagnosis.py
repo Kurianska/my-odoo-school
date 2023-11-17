@@ -23,13 +23,12 @@ class Diagnosis(models.Model):
     intern_id = fields.Many2one(comodel_name='hr.hospital.doctor',
                                 string="Intern",
                                 domain="[('is_intern', '=', True)]",
-                                required=True)
+                                )
 
-
-@api.constrains('intern_id', 'mentor_comment')
-def _check_mentor_comments(self):
-    for record in self:
-        if record.intern_id and not record.mentor_comment:
-            raise exceptions.ValidationError(
-                _("Mentor's comment is required for "
-                  "the diagnosis made by the intern."))
+    @api.constrains('intern_id', 'mentor_comment')
+    def _check_mentor_comments(self):
+        for record in self:
+            if record.intern_id and not record.mentor_comment:
+                raise exceptions.ValidationError(
+                    _("Mentor's comment is required for "
+                      "the diagnosis made by the intern."))

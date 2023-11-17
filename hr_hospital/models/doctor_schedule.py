@@ -6,12 +6,17 @@ class DoctorSchedule(models.Model):
     _name = 'hr.hospital.doctor.schedule'
     _description = 'Hospital Doctor Schedule'
 
+    active = fields.Boolean(
+        default=True, )
     doctor_id = fields.Many2one(
         comodel_name='hr.hospital.doctor',
         string="Doctor",
         required=True,
         ondelete='cascade'
     )
+    patient_id = fields.Many2one(
+        comodel_name='hr.hospital.patient',
+        string='Patient', required=True)
     appointment_date = fields.Date(required=True)
     appointment_time = fields.Char(required=True)
     day_of_week = fields.Selection(
@@ -30,8 +35,7 @@ class DoctorSchedule(models.Model):
         ('even', 'Even Week'),
         ('odd', 'Odd Week'),
         ('all', 'Every Week')
-    ], string='Week Type',
-        default='all',
+    ], default='all',
         required=True)
 
     @api.constrains('doctor_id', 'appointment_date', 'appointment_time')

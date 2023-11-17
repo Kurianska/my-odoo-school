@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_hospital_patient_test_tree" model="ir.ui.view">
+        <field name="name">hr.hospital.patient.test.tree</field>
+        <field name="model">hr.hospital.patient.test</field>
+        <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+        </tree>
+        </field>
+    </record>
+
+    <record id="hr_hospital_patient_test_form" model="ir.ui.view">
+        <field name="name">hr.hospital.patient.test.form</field>
+        <field name="model">hr.hospital.patient.test</field>
+        <field name="arch" type="xml">
+            <form>
+                <header></header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="test_type"/>
+                        <field name="date"/>
+                        <field name="patient_id" widget="many2one_tags" required="1"/>
+                        <field name="phone"/>
+                        <field name="email"/>
+                        <field name="birthday_date"/>
+                        <field name="passport_data"/>
+                        <field name="age"/>
+                        <field name="doctor_id" widget="many2one_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_hospital_patient_test_pivot" model="ir.ui.view">
+        <field name="name">hr.hospital.patient.test.pivot</field>
+        <field name="model">hr.hospital.patient.test</field>
+        <field name="arch" type="xml">
+            <pivot string="Patient Test Analysis">
+                <field name="test_type" type="row"/>
+                <field name="name" type="col"/>
+                <field name="doctor_id" type="row" />
+                <field name="date" type="col" interval="month" group="1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="hr_hospital_patient_test_search" model="ir.ui.view">
+        <field name="name">hr.hospital.patient.test.search</field>
+        <field name="model">hr.hospital.patient.test</field>
+        <field name="arch" type="xml">
+            <search string="Patient Test Search">
+                <field name="name" string="Test Name"/>
+                <field name="phone" string="Patient Phone"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_hospital_patient_test_act_window" model="ir.actions.act_window">
+        <field name="name">Tests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.hospital.patient.test</field>
+        <field name="view_mode">pivot,tree,form,search</field>
+    </record>
+
+    <menuitem id="hr_hospital_patient_test_menu"
+          action="hr_hospital_patient_test_act_window"
+          parent="hr_hospital_main_menu"
+          sequence="10"/>
+
+</odoo>

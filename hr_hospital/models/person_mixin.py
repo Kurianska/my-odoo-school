@@ -10,8 +10,8 @@ class PersonMixin(models.AbstractModel):
 
     active = fields.Boolean(
         default=True, )
-    phone = fields.Char(required=True)
-    email = fields.Char(required=True)
+    phone = fields.Char(required=True,)
+    email = fields.Char(required=True,)
     address = fields.Char()
     gender = fields.Selection(selection=[
         ('male', 'Male'),

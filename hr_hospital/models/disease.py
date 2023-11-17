@@ -27,6 +27,10 @@ class Disease(models.Model):
     diagnosis_ids = fields.One2many(
         comodel_name='hr.hospital.diagnosis',
         inverse_name='disease_id', string='Diagnoses')
+    patient_id = fields.Many2one(
+        comodel_name='hr.hospital.patient',
+        string='Patient'
+    )
 
     @api.depends('name', 'parent_id.complete_name')
     def _compute_complete_name(self):

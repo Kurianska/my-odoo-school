@@ -20,10 +20,13 @@
         "views/disease_view.xml",
         "views/visit_view.xml",
         "views/diagnosis_view.xml",
+        "views/patient_test_view.xml",
+        "views/doctor_schedule_calendar.xml",
         "wizard/reassign_doctor_wizard.xml",
         "wizard/disease_report_wizard.xml",
         "wizard/reschedule_visit_wizard.xml",
         "wizard/doctor_schedule_wizard_week.xml",
+        "wizard/mass_reassign_doctor_wizard.xml",
     ],
 
     'demo': [

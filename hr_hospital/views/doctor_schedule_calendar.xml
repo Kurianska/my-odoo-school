@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_hospital_doctor_schedule_tree" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.schedule.tree</field>
+        <field name="model">hr.hospital.doctor.schedule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="doctor_id" string="Doctor"/>
+                <field name="patient_id" string="Patient"/>
+                <field name="appointment_date" string="Date"/>
+                <field name="appointment_time" string="Time"/>
+                <field name="week_type" string="Week Type"/>
+                <field name="day_of_week" string="Day of Week"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_hospital_doctor_schedule_calendar" model="ir.ui.view">
+    <field name="name">hr.hospital.doctor.schedule.calendar</field>
+    <field name="model">hr.hospital.doctor.schedule</field>
+    <field name="arch" type="xml">
+        <calendar string="Doctor Schedules"
+                  date_start="appointment_date"
+                  color="doctor_id">
+            <field name="doctor_id"/>
+            <field name="patient_id"/>
+            <field name="appointment_time"/>
+            <field name="week_type"/>
+        </calendar>
+    </field>
+</record>
+
+    <record id="hr_hospital_doctor_schedule_action_calendar" model="ir.actions.act_window">
+        <field name="name">Doctor Schedules</field>
+        <field name="res_model">hr.hospital.doctor.schedule</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="view_id" ref="hr_hospital_doctor_schedule_calendar"/>
+    </record>
+
+    <menuitem id="menu_hr_hospital_doctor_schedule_calendar"
+              name="Doctor Schedules"
+              action="hr_hospital_doctor_schedule_action_calendar"
+              parent="hr_hospital_main_menu"
+              sequence="11"/>
+</odoo>

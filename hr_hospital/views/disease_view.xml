@@ -27,10 +27,29 @@
         </field>
     </record>
 
+    <record id="hr_hospital_disease_search" model="ir.ui.view">
+        <field name="name">hr.hospital.disease.search</field>
+        <field name="model">hr.hospital.disease</field>
+        <field name="arch" type="xml">
+            <search>
+                <searchpanel view_types="tree,pivot">
+                    <field name="parent_id" string="Parent Disease" hierarchize="1" enable_counters="1"/>
+                </searchpanel>
+                <field name="name" string="Disease Name"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Parent Disease" name="group_by_parent" domain="[]" context="{'group_by': 'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="hr_hospital_disease_act_window" model="ir.actions.act_window">
         <field name="name">Diseases</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hr.hospital.disease</field>
+        <field name="search_view_id" ref="hr_hospital_disease_search"/>
         <field name="view_mode">tree,form</field>
     </record>
 
