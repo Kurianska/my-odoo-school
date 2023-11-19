@@ -1,0 +1,102 @@
+<odoo>
+   <template id="company_info_template">
+       <t t-forearch="docs" t-as="doc">
+        <div>
+            <div class="offset-8 col-4">
+                <img t-att-src="'/logo.png?company=%s' % doc.company_id.id" t-att-alt="'Logo of %s' % doc.company_id.name" t-att-title="doc.company_id.name"/>
+            </div>
+            <div class="offset-8 col-4">
+                <t t-esc="doc.company_id.street"/>
+                <t t-esc="doc.company_id.phone"/>
+            </div>
+        </div>
+       </t>
+   </template>
+
+    <template id="content_hr_hospital_doctor">
+        <t t-forearch="docs" t-as="doc">
+
+            <style type="text/css">
+                .custom-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                .custom-table th, .custom-table td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                }
+                .custom-table th {
+                    text-align: left;
+                    background-color: #f2f2f2;
+                }
+                .custom-table tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+                .custom-table tr:hover {
+                    background-color: #ddd;
+                }
+                .custom-table .highlight {
+                    font-weight: bold;
+                }
+            </style>
+
+            <div class="oe_structure"/>
+            <div class="col-xs-12 text-center">
+                <h2>Doctor's Report</h2>
+            </div>
+            <div class="row mt16 mb16">
+                <div class="offset-6 col-xs-6">
+                    <strong>Doctor:</strong><span t-field="doc.name"/>
+                </div>
+                <div class="offset-6 col-xs-6">
+                    <strong>Specialty:</strong><span t-field="doc.specialty"/>
+                </div>
+            </div>
+
+            <div>
+                <h3>Activity History</h3>
+            </div>
+
+            <table class="table table-condensed custom-table">
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Birthday Date</th>
+                        <th>Diagnosis</th>
+                        <th>Incidence Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="doc.patient_ids" t-as="patient">
+                        <td t-esc="patient.name"/>
+                        <td t-esc="patient.birthday_date"/>
+                        <td>
+                            <t t-foreach="patient.disease_ids" t-as="disease">
+                                <span t-if="disease.name" t-esc="disease.name"/>
+                            </t>
+                        </td>
+                        <td>
+                            <t t-if="patient.incidence_level">
+                                <span t-att-style="'background-color: %s' % (patient.incidence_level == 'high' and 'red' or patient.incidence_level == 'medium' and 'yellow' or patient.incidence_level == 'low' and 'green')">
+                                    <t t-esc="patient.incidence_level"/>
+                                </span>
+                            </t>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="col-xs-12 text-right">
+                <span>Date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></span>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_hr_hospital_doctor">
+        <t t-call="web.html_container">
+            <t t-forearch="docs" t-as="doc">
+                <t t-call="hr_hospital.company_info_template" />
+                <t t-call="hr_hospital.content_hr_hospital_doctor"/>
+            </t>
+        </t>
+    </template>
+</odoo>

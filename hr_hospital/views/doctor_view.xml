@@ -35,6 +35,7 @@
                         <field name="email"/>
                         <field name="address"/>
                         <field name="specialty"/>
+                        <field name="patient_ids" wiget="Many2many"/>
                         <field name="is_intern" attrs="{'invisible': [('is_mentor', '=', True)]}"/>
                         <field name="is_mentor" attrs="{'invisible': [('is_intern', '=', True)]}"/>
                         <field name="mentor_id" attrs="{'invisible': [('is_intern', '=', False)]}"/>
@@ -85,11 +86,15 @@
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class="oe_kanban_details">
-                                <div><strong><field name="name"/></strong></div>
-                                <div>Specialty: <field name="specialty"/></div>
+                                <div><field name="image"/></div>
+                                <div><h3><strong><field name="name"/></strong></h3></div>
+                                <div><strong>Specialty: </strong><field name="specialty"/></div>
+                                <div><strong>Patients: </strong><field name="patient_ids"/></div>
                             </div>
-                             <button type="object" name="action_schedule_appointment" class="btn btn-secondary">Schedule Appointment</button>
-                            <button type="object" name="action_open_mass_reassignment_wizard" class="btn btn-primary">Reassign Doctor for Patients</button>
+                            <div style="display: flex;">
+                                <button type="object" name="action_schedule_appointment" class="btn btn-secondary" style="margin-right: 10px;">Schedule Appointment</button>
+                                <button type="object" name="action_open_mass_reassignment_wizard" class="btn btn-primary">Reassign Doctor for Patients</button>
+                            </div>
                         </div>
                     </t>
                 </templates>
@@ -112,11 +117,7 @@
         <field name="name">Doctors</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hr.hospital.doctor</field>
-        <field name="view_mode">kanban,tree,form</field>
-        <field name="context">{
-        'search_default_is_intern': 0,
-        'search_default_mentor_id': 1
-    }</field>
+        <field name="view_mode">kanban,tree,form,search</field>
     </record>
 
     <menuitem id="hr_hospital_doctors_menu"

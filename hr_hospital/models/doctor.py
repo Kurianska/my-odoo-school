@@ -44,6 +44,9 @@ class Doctor(models.Model):
         ('done', 'Done'),
     ], default='draft', string='Status')
 
+    company_id = fields.Many2one('res.company', string='Company',
+                                 default=lambda self: self.env.company)
+
     @api.constrains('is_intern', 'mentor_id')
     def _check_intern_mentor(self):
         for record in self:

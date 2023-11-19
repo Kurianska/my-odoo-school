@@ -1,4 +1,4 @@
-from odoo import models, fields, _
+from odoo import models, fields, _, api
 
 
 class Patient(models.Model):
@@ -35,6 +35,14 @@ class Patient(models.Model):
         inverse_name='patient_id',
         string='Patient Disease'
     )
+
+    incidence_level = fields.Selection([
+        ('low', 'Low'),
+        ('medium', 'Medium'),
+        ('high', 'High'),
+    ], help='Level of incidence.')
+
+    color_code = fields.Char(compute='_compute_color_code')
 
     def write(self, vals):
         res = super().write(vals)
@@ -80,3 +88,13 @@ class Patient(models.Model):
             },
             'target': 'new',
         }
+
+    @api.depends('incidence_level')
+    def _compute_color_code(self):
+        for record in self:
+            if record.incidence_level == 'high':
+                record.color_code = 'red'
+            elif record.incidence_level == 'medium':
+                record.color_code = 'yellow'
+            else:
+                record.color_code = 'green'

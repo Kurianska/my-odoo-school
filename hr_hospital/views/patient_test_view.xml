@@ -43,7 +43,7 @@
                 <field name="test_type" type="row"/>
                 <field name="name" type="col"/>
                 <field name="doctor_id" type="row" />
-                <field name="date" type="col" interval="month" group="1"/>
+                <field name="date" type="col" interval="month"/>
             </pivot>
         </field>
     </record>

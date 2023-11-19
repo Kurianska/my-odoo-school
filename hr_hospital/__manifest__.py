@@ -14,6 +14,8 @@
     'data': [
         "data/data_disease.xml",
         "security/ir.model.access.csv",
+        "report/model_report_doctor_template.xml",
+        "report/models_report.xml",
         "views/menu.xml",
         "views/patient_view.xml",
         "views/doctor_view.xml",
